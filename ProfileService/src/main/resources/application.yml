@@ -1,0 +1,24 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: Profile-Service
+  output:
+    ansi:
+      enabled: ALWAYS
+  data:
+    mongodb:
+      authentication-database: admin
+      host: localhost
+      username: rootuser
+      password: rootpass
+      database: springboot_mongo_profiles_db
+      port: 27017
+      auto-index-creation: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
