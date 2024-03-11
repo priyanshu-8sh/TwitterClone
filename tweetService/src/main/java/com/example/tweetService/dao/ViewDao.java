@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ViewDao {
-     View findByTweetIdAndProfileId(long tweetId, String profileId);
+     View findByTweetIdAndProfileId(Long tweetId, String profileId);
      View createView(View view);
 }

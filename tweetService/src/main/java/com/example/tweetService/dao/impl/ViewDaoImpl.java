@@ -11,10 +11,10 @@ public class ViewDaoImpl implements ViewDao {
     @Autowired
     private ViewRepository viewRepository;
     @Override
-    public View findByTweetIdAndProfileId(long tweetId, String profileId)
+    public View findByTweetIdAndProfileId(Long tweetId, String profileId)
     {
-        if(viewRepository.findByTweetIdAndProfileId(tweetId,profileId).isPresent())
-            return viewRepository.findByTweetIdAndProfileId(tweetId,profileId).get();
+        if(viewRepository.findByParentTweetIdAndProfileId(tweetId,profileId).isPresent())
+            return viewRepository.findByParentTweetIdAndProfileId(tweetId,profileId).get();
         else
             return null;
     }

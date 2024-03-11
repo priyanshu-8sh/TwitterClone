@@ -19,6 +19,7 @@ public class TweetDaoImpl implements TweetDao {
     private TweetRepository tweetRepository;
     @Autowired
     private LikeRepository likeRepository;
+
      @Override
      public Tweet createTweet(Tweet tweet)
      {
@@ -27,14 +28,13 @@ public class TweetDaoImpl implements TweetDao {
          return tweet;
      }
      @Override
-     public Tweet updateTweet(long tweetId,Tweet UpdateTweet)
+     public Tweet updateTweet(Long tweetId,Tweet UpdateTweet)
      {
          Optional<Tweet> tweetDb=tweetRepository.findById(tweetId);
             if(tweetDb.isPresent())
             {
                 Tweet tweet=tweetDb.get();
                 tweet.setText(UpdateTweet.getText());
-//                tweet.setDeleted(true);
                 tweetRepository.saveAndFlush(tweet);
                 return tweet;
             }
@@ -42,7 +42,7 @@ public class TweetDaoImpl implements TweetDao {
                 throw new RuntimeException("Tweet not found");
      }
      @Override
-     public Tweet getTweet(long tweetId)
+     public Tweet getTweet(Long tweetId)
     {
         Optional<Tweet> tweet=tweetRepository.findById(tweetId);
         if(tweet.isPresent())
@@ -52,25 +52,42 @@ public class TweetDaoImpl implements TweetDao {
 
     }
     @Override
-    public int CountRepliesToTweetById(long replyToId)
+    public Tweet getReplyTweet(Long replyToId)
+    {
+        Optional<Tweet> tweet=tweetRepository.findByIdAndReplyToIsNotNull(replyToId);
+        if(tweet.isPresent())
+
+            return tweet.get();
+        else
+            throw new RuntimeException("Tweet not found");
+
+    }
+    @Override
+    public int CountRepliesToTweetById(Long replyToId)
      {
          return tweetRepository.countAllByReplyToId(replyToId);
      }
      @Override
-    public int CountRetweetToTweetById(long retweetToId)
+    public int CountRetweetToTweetById(Long retweetToId)
      {
             return tweetRepository.countAllByRetweetToId(retweetToId);
      }
      @Override
-     public  boolean isRetweetedByLoggedInUser(long retweetToId, String loggedInUser)
+     public  boolean isRetweetedByLoggedInUser(Long retweetToId, String loggedInUser)
      {
          return tweetRepository.findByRetweetToIdAndProfileId(retweetToId,loggedInUser);
      }
      @Override
-     public void deleteTweet(long tweetId)
+     public void deleteTweet(Long tweetId)
      {
          tweetRepository.deleteById(tweetId);
          return;
      }
+     @Override
+     public List<Tweet> getAllRepliesForUser(String profileId)
+     {
+         return tweetRepository.findAllByProfileIdAndReplyToIdIsNotNull(profileId);
+     }
+
 
 }

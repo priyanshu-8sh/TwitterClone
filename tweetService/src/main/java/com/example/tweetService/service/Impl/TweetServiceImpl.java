@@ -9,6 +9,7 @@ import com.example.tweetService.dto.response.TweetResponseDTO;
 import com.example.tweetService.entity.Tweet;
 import com.example.tweetService.mapper.TweetMapper;
 import com.example.tweetService.service.ClientService;
+import com.example.tweetService.service.KafkaService;
 import com.example.tweetService.service.TweetService;
 import com.example.tweetService.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class TweetServiceImpl implements TweetService {
 
     @Autowired
     ViewService viewService;
-
-
+    @Autowired
+    KafkaService kafkaService;
     @Override
     public TweetResponseDTO createTweet(TweetRequestDTO createTweetRequestDTO, String loggedInUser)
     {
@@ -38,6 +39,10 @@ public class TweetServiceImpl implements TweetService {
                     return TweetMapper.toEntity(request, null, null, loggedInUser);
                 })
                 .map(tweet->tweetDao.createTweet(tweet))
+                .map(tweet->{
+                    kafkaService.sendMessageWithTweetToKafka(tweet, "ADD");
+                    return tweet;
+                })
                 //add kafka storing of tweets here
                 .map(tweet->{
                     return TweetMapper.toResponse(tweet, loggedInUser);

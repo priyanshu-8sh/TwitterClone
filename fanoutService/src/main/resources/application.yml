@@ -1,0 +1,13 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: Fanout-Service
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  kafka:
+    bootstrap-servers: localhost:9092
+

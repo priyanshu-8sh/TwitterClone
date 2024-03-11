@@ -7,7 +7,9 @@ import com.example.tweetService.entity.View;
 import com.example.tweetService.mapper.ViewMapper;
 import com.example.tweetService.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ViewServiceImpl implements ViewService {
     @Autowired
     ViewDao viewDao;

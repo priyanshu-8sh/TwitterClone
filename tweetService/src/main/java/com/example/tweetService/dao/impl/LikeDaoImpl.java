@@ -29,14 +29,7 @@ public class LikeDaoImpl implements LikeDao {
 
         Like like=LikeMapper.toLike(tweetDB.get(),profileId);
         likeRepository.saveAndFlush(like);
-        //saves the new like to the tweet
-        Tweet tweet=tweetDB.get();
-        Set<Like> likes=tweet.getLikes();
-        likes.add(like);
-        tweet.setLikes(likes);
-        tweetRepository.saveAndFlush(tweet);
-
-
+        //when we'll extract the tweet the like will be automatically added in it
         return;
     }
     @Override
@@ -50,15 +43,6 @@ public class LikeDaoImpl implements LikeDao {
         }
         else
             throw new RuntimeException("Like not found");
-        //removes the like from the tweet
-        Optional<Tweet>tweetDb=tweetRepository.findById(tweetId);
-        if(!tweetDb.isPresent())
-            throw new RuntimeException("Tweet not found");
-        Tweet tweet=tweetDb.get();
-        Set<Like> likes=tweet.getLikes();
-        likes.remove(like.get());
-        tweet.setLikes(likes);
-        tweetRepository.saveAndFlush(tweet);
     }
 
     @Override

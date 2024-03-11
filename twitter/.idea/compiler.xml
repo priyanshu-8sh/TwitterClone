@@ -10,6 +10,7 @@
         <module name="tweetService" />
         <module name="clients" />
         <module name="ProfileService" />
+        <module name="fanoutService" />
         <module name="eureka-discovery-server" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="clients" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="eureka-discovery-server" options="-parameters" />
+      <module name="fanoutService" options="-parameters" />
       <module name="tweetService" options="-parameters" />
     </option>
   </component>
