@@ -75,7 +75,7 @@ public class TweetDaoImpl implements TweetDao {
      @Override
      public  boolean isRetweetedByLoggedInUser(Long retweetToId, String loggedInUser)
      {
-         return tweetRepository.findByRetweetToIdAndProfileId(retweetToId,loggedInUser);
+         return tweetRepository.existsByRetweetToIdAndProfileId(retweetToId,loggedInUser);
      }
      @Override
      public void deleteTweet(Long tweetId)

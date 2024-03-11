@@ -8,10 +8,11 @@ import com.example.tweetService.repository.TweetRepository;
 import com.example.tweetService.mapper.LikeMapper;
 import com.example.clients.profile.ProfileServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
-
+@Service
 public class LikeDaoImpl implements LikeDao {
     @Autowired
     private LikeRepository likeRepository;

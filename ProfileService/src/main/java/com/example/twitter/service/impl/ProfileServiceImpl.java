@@ -66,8 +66,6 @@ public class ProfileServiceImpl implements ProfileService {
                 .orElseThrow(() -> new RuntimeException("Profile not found"));
     }
 
-
-
     public List<ProfileResponseDTO> findAllByUsernameContaining(String username, Pageable pageable) {
         Page<Profile> profilePages=profileRepository.findByUsernameContaining(username, pageable);
         List<Profile> profiles=profilePages.getContent();

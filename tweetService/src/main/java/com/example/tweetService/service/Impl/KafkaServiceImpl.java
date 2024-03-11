@@ -12,7 +12,7 @@ import com.example.tweetService.dto.kafka.KafkaTweetMessage;
 public class KafkaServiceImpl implements KafkaService {
     @Autowired
     private KafkaTemplate<String,String> kafkaTemplate;
-    private Gson gson;
+    private Gson gson=new Gson();
     public void send(KafkaTweetMessage kafkaTweetMessage, String topic) {
         String msg = gson.toJson(kafkaTweetMessage);
         kafkaTemplate.send(topic, msg);

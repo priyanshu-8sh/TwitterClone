@@ -11,7 +11,7 @@ public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
     int countAllByRetweetToId(Long retweetToId);
 
-    boolean findByRetweetToIdAndProfileId(Long retweetToId, String loggedInUser);
+    boolean existsByRetweetToIdAndProfileId(Long retweetToId, String loggedInUser);
 
     Optional<Tweet> findByIdAndReplyToIsNotNull(Long replyToId);
 

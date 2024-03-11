@@ -12,12 +12,18 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 @Component
 public  class TweetMapper {
-    @Autowired
+
     private static ProfileServiceClient profileServiceClient;
-    @Autowired
+
     private static LikeDao likeDao;
-    @Autowired
+
     private static TweetDao tweetDao;
+    @Autowired
+    public TweetMapper(ProfileServiceClient profileServiceClient, LikeDao likeDao, TweetDao tweetDao) {
+        TweetMapper.profileServiceClient = profileServiceClient;
+        TweetMapper.likeDao = likeDao;
+        TweetMapper.tweetDao = tweetDao;
+    }
     public static Tweet toEntity(TweetRequestDTO createTweetRequestDTO, Tweet quoteTo, Tweet replyTo, String loggedInUser) {
         Tweet tweet = new Tweet();
         tweet.setText(createTweetRequestDTO.getText());
@@ -51,9 +57,4 @@ public  class TweetMapper {
 
         return tweetResponseDTO;
     }
-
-//    public boolean isTweetLikedByLoggedInUser(Long parentTweetId, String loggedInUser, ProfileServiceClient profileServiceClient) {
-//        String profileIdOfLoggedInUser = profileServiceClient.getProfileIdByLoggedInUser(loggedInUser);
-//        return LikeDao.findByParentTweetIdAndProfileId(parentTweetId, profileIdOfLoggedInUser).isPresent();
-//    }
 }
