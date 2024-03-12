@@ -1,0 +1,5 @@
+services:
+  zipkin-slim:
+    image: openzipkin/zipkin-slim
+    ports:
+      - "9411:9411"

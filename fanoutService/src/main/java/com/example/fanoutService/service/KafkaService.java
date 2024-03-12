@@ -1,5 +1,6 @@
 package com.example.fanoutService.service;
 
 public interface KafkaService {
-    void reciveMessage(String message)
+    void reciveMessageFromUserTopic(String message);
+    void reciveMessageFromHomeTopic(String message);
 }
