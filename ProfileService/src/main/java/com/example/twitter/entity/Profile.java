@@ -15,6 +15,7 @@ public class Profile {
     @Id
     private String id;
     @Indexed(unique = true) private String email;
+    @Indexed(unique = true)
     private String username;
     private LocalDate joinDate;
     private String bio;

@@ -21,7 +21,6 @@ public class ProfileController {
     @PostMapping("/createProfile")
     public ResponseEntity<?> createProfile(@RequestBody ProfileRequestDTO profileRequestDTO )
     {
-
         String profileId=profileService.createProfile(profileRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(profileId);
 

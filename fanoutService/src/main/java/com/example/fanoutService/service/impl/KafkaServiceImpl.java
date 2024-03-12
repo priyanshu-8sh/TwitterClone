@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 public class KafkaServiceImpl implements KafkaService {
     private Gson gson;
 
-    @KafkaListener(topics = "fanout", groupId = "group_id")
+    @Override
+    @KafkaListener(topics = "user-timeline", groupId = "group_id")
     public void reciveMessage(String message) {
         System.out.println("Recieved message: " + message);
     }
